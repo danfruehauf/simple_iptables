@@ -24,13 +24,20 @@ include_recipe 'iptables-ng::install'
 
 ### BEGIN MANDATORY RULES ###
 # This is a must rule as well, to allow outgoing connections
-iptables_ng_rule 'established_conns' do
+iptables_ng_rule '000_established_conns' do
   rule "-m state --state RELATED,ESTABLISHED -j ACCEPT"
 end
 
 # Allow all traffic on localhost
-iptables_ng_rule 'localhost' do
+iptables_ng_rule '000_localhost' do
   rule "-i lo -j ACCEPT"
+end
+
+# Allow SSH from any by default
+if node['simple_iptables']['allow_ssh']
+  iptables_ng_rule '000_ssh_from_any' do
+    rule "-p tcp -s 0/0 --dport 22 -j ACCEPT"
+  end
 end
 
 # DROP policy for INPUT chain

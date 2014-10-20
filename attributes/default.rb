@@ -25,3 +25,6 @@ default['simple_iptables']['entries']   = []
 
 # Maximum rules allowed
 default['simple_iptables']['max_rules'] = 1024
+
+# Allow SSH from all, unless specified otherwise
+default['simple_iptables']['allow_ssh'] = true
