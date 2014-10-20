@@ -1,0 +1,14 @@
+{
+    "name": "test",
+    "simple_iptables": {
+        "entries": [
+            {
+                "comment": "test comment",
+                "rules": [
+                    { "from_addr": "10.0.0.1/32", "start_port": 22 }
+                ]
+            },
+            { "data_bag": "test1" }
+        ]
+    }
+}

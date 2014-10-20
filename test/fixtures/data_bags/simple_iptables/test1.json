@@ -1,0 +1,19 @@
+{
+  "id": "test1",
+  "entries": [
+      {
+          "comment": "test1 entries #1",
+          "rules": [
+              { "from_addr": "192.168.0.0/24", "start_port": 123 },
+              { "from_addr": "192.168.0.0/24", "start_port": 234 }
+          ]
+      },
+      {
+          "comment": "test1 entries #2",
+          "rules": [
+              { "from_addr": "192.168.10.0/24", "start_port": 345 },
+              { "from_addr": "192.168.10.0/24", "start_port": 456 }
+          ]
+      }
+  ]
+}
