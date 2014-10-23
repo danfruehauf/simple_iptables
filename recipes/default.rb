@@ -1,23 +1,23 @@
 #
-# Cookbook Name:: simple_iptables
+# Cookbook Name:: simple_iptables_ng
 # Recipe:: default
 #
 # Copyright 2014, Dan Fruehauf
 #
-# This file is part of simple_iptables.
+# This file is part of simple_iptables_ng.
 #
-# simple_iptables is free software: you can redistribute it and/or modify
+# simple_iptables_ng is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# simple_iptables is distributed in the hope that it will be useful,
+# simple_iptables_ng is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with simple_iptables.  If not, see <http://www.gnu.org/licenses/>.
+# along with simple_iptables_ng.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 include_recipe 'iptables-ng::install'
@@ -34,7 +34,7 @@ iptables_ng_rule '000_localhost' do
 end
 
 # Allow SSH from any by default
-if node['simple_iptables']['allow_ssh']
+if node['simple_iptables_ng']['allow_ssh']
   iptables_ng_rule '000_ssh_from_any' do
     rule "-p tcp -s 0/0 --dport 22 -j ACCEPT"
   end
@@ -54,10 +54,10 @@ end
 # Firewall rules from data bags
 firewall_rules = []
 
-node['simple_iptables']['entries'].each do |firewall_entry|
+node['simple_iptables_ng']['entries'].each do |firewall_entry|
   if firewall_entry['data_bag']
     # Rules from defined data bag
-    firewall_data_bag = data_bag_item("simple_iptables", firewall_entry['data_bag'])
+    firewall_data_bag = data_bag_item("simple_iptables_ng", firewall_entry['data_bag'])
     firewall_data_bag['entries'].each do |firewall_entry_db|
       firewall_rules.concat(firewall_entry_db['rules'])
     end
@@ -67,7 +67,7 @@ node['simple_iptables']['entries'].each do |firewall_entry|
 end
 
 # Clear old rules from previous runs
-for i in firewall_rules.size..node['simple_iptables']['max_rules'] do
+for i in firewall_rules.size..node['simple_iptables_ng']['max_rules'] do
   rule_to_delete = "/etc/iptables.d/filter/INPUT/chef_iptables_#{i}.rule_v4"
   if(File.exists?(rule_to_delete))
     Chef::Log.info("Deleting rule #{rule_to_delete}")

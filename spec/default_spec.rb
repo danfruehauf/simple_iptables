@@ -1,6 +1,6 @@
 require 'spec_helper'
  
-describe 'simple_iptables::default' do
+describe 'simple_iptables_ng::default' do
   let (:chef_run) do
     ChefSpec::Runner.new do |node|
       node.automatic.merge!(JSON.parse(File.read('test/fixtures/nodes/test.json')))
@@ -8,7 +8,7 @@ describe 'simple_iptables::default' do
   end
 
   before do
-    stub_data_bag_item("simple_iptables", "test1").and_return(JSON.parse(File.read('test/fixtures/data_bags/simple_iptables/test1.json')))
+    stub_data_bag_item("simple_iptables_ng", "test1").and_return(JSON.parse(File.read('test/fixtures/data_bags/simple_iptables_ng/test1.json')))
   end
 
   it 'should include iptables-ng recipe' do
@@ -16,10 +16,10 @@ describe 'simple_iptables::default' do
   end
 
   it 'should create mandatory rules' do
-    expect(chef_run).to create_iptables_ng_rule('established_conns').
+    expect(chef_run).to create_iptables_ng_rule('000_established_conns').
       with(rule: '-m state --state RELATED,ESTABLISHED -j ACCEPT')
 
-    expect(chef_run).to create_iptables_ng_rule('localhost').
+    expect(chef_run).to create_iptables_ng_rule('000_localhost').
       with(rule: '-i lo -j ACCEPT')
   end
 

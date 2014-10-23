@@ -1,6 +1,6 @@
 {
     "name": "test",
-    "simple_iptables": {
+    "simple_iptables_ng": {
         "entries": [
             {
                 "comment": "test comment",

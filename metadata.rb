@@ -1,4 +1,4 @@
-name             "simple_iptables"
+name             "simple_iptables_ng"
 maintainer       "Dan Fruehauf"
 maintainer_email "malkodan@gmail.com"
 license          "GNU Public License 3.0"
@@ -6,7 +6,7 @@ description      "Simple wrapper cookbook for iptales-ng"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "1.0.0"
 
-recipe 'simple_iptables::default', 'Configures iptables'
+recipe 'simple_iptables_ng::default', 'Configures iptables'
 
 %w(
 ubuntu

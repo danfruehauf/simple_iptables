@@ -1,5 +1,5 @@
-simple_iptables Cookbook
-=====================
+simple_iptables_ng Cookbook
+===========================
 A simple wrapper book to easily manage iptables. supports also deleting rules
 from previous chef runs.
 
@@ -11,21 +11,21 @@ Requirements
 
 Attributes
 ----------
- * `node['simple_iptables']['data_bags']` - data bags to load for iptables rules
- * `node['simple_iptables']['max_rules']` - maximum rules to support used for
+ * `node['simple_iptables_ng']['data_bags']` - data bags to load for iptables rules
+ * `node['simple_iptables_ng']['max_rules']` - maximum rules to support used for
    deleting rules from previous runs
 
 Usage
 -----
-#### simple_iptables::default
-Include `simple_iptables` in your node's `run_list` or role's `run_list`:
+#### simple_iptables_ng::default
+Include `simple_iptables_ng` in your node's `run_list` or role's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[simple_iptables]"
+    "recipe[simple_iptables_ng]"
   ],
-  "simple_iptables": {
+  "simple_iptables_ng": {
     "entries": [
       {
         "comment": "test comment",
